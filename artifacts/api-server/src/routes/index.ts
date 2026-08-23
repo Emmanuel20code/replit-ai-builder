@@ -1,0 +1,12 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health";
+import builderRouter from "./builder";
+import githubRouter from "./github";
+
+const router: IRouter = Router();
+
+router.use(healthRouter);
+router.use(builderRouter);
+router.use(githubRouter);
+
+export default router;
