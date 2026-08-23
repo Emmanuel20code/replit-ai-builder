@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "JEVISH AI Builder"
+description = "A browser-based AI builder that turns natural language into working web projects, with an integrated workspace preview and secure GitHub publishing from Settings."
+version = "1.0.0"
+id = "artifacts/jevish-ai-builder"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18252
+
+[services.development]
+run = "pnpm --filter @workspace/jevish-ai-builder run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/jevish-ai-builder", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/jevish-ai-builder/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18252"
+BASE_PATH = "/"
